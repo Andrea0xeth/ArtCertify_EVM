@@ -36,6 +36,9 @@ export const config = {
   pinataGateway: getEnvVar('VITE_PINATA_GATEWAY', true),
   pinataJwt: getEnvVar('VITE_PINATA_JWT', true),
 
+  // MinIO/S3 public base URL for certification files (no trailing slash). Set via VITE_MINIO_PUBLIC_URL.
+  minioPublicUrl: getEnvVar('VITE_MINIO_PUBLIC_URL', true).replace(/\/+$/, ''),
+
   network: { isMainnet: true, isTestnet: false },
 };
 

@@ -16,6 +16,7 @@
    - `VITE_BASE_RPC_URL`, `VITE_BASE_EXPLORER_URL`
    - `VITE_SBT_CONTRACT_ADDRESS` (dopo il deploy)
    - `VITE_PINATA_API_KEY`, `VITE_PINATA_API_SECRET`, `VITE_PINATA_JWT` (per upload IPFS)
+   - `VITE_MINIO_PUBLIC_URL` (host pubblico dei file su MinIO/S3, senza slash finale)
 
 2. **Deploy contratto SBT** (una volta):
    ```bash
@@ -306,7 +307,10 @@ VITE_ALGORAND_NETWORK=testnet  # o mainnet per produzione
 VITE_API_BASE_URL=http://localhost:8088  # URL del backend API
 
 # MINIO/S3 Storage (gestito tramite backend API con presigned URLs)
-# I file vengono caricati su: https://s3.caputmundi.artcertify.com/{userAddress}/{filename}
+# Host pubblico (no slash finale) usato per costruire/leggere gli URL dei file:
+#   {VITE_MINIO_PUBLIC_URL}/{userAddress}/{filename}
+# Deve essere pubblicamente raggiungibile in HTTPS dal browser.
+VITE_MINIO_PUBLIC_URL=https://s3.caputmundi.artcertify.com
 # Il backend genera presigned URLs tramite endpoint: /api/v1/presigned/upload
 ```
 
@@ -492,6 +496,7 @@ VITE_PINATA_GATEWAY=your-production-gateway.mypinata.cloud
 VITE_PINATA_API_KEY=your_production_api_key
 VITE_PINATA_API_SECRET=your_production_secret
 VITE_PINATA_JWT=your_production_jwt
+VITE_MINIO_PUBLIC_URL=https://s3.caputmundi.artcertify.com  # host pubblico file MINIO (no slash finale)
 
 # Verifica build
 npm run preview
